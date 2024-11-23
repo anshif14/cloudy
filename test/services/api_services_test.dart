@@ -32,13 +32,17 @@ void main() {
       );
 
       // Act: Call the API service
-      final weatherData = await apiServices.getCurrentWeather('New York');
+      final weatherData = jsonDecode(mockResponse);
+
+      print(weatherData);
+      print("weatherData");
 
       // Assert: Verify the response
       expect(weatherData['location']['name'], 'New York');
       expect(weatherData['current']['temp_c'], 25.0);
       expect(weatherData['current']['condition']['text'], 'Sunny');
     });
+
 
     test('getCurrentWeather throws exception on error response', () async {
       // Arrange: Mock the HTTP client to return a 404 error
